@@ -76,7 +76,7 @@ const RequestFlowSimulator: React.FC = () => {
           Log del Sistema
         </div>
         <p className="text-green-400 font-mono text-xl md:text-3xl min-h-[1.5em] leading-tight">
-          <span className="mr-4 text-indigo-500 font-black tracking-tighter">>>></span>{log}
+          <span className="mr-4 text-indigo-500 font-black tracking-tighter">{">>>"}</span>{log}
         </p>
       </div>
 
