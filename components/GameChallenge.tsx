@@ -9,61 +9,61 @@ const scenarios: GameScenario[] = [
     id: 1,
     task: "Definir el color y tamaño de los botones principales.",
     correct: 'frontend',
-    explanation: "El diseño visual y los estilos (CSS) son responsabilidad total del Frontend."
+    explanation: "El Frontend es el responsable de todo lo que el usuario ve y toca directamente. Usando CSS, la interfaz define la estética, los colores y la disposición visual para que la aplicación sea atractiva y fácil de usar."
   },
   {
     id: 2,
     task: "Transformar contraseñas en texto plano a 'Hashes' (códigos cifrados).",
     correct: 'backend',
-    explanation: "La seguridad de los datos sensibles y el cifrado ocurren en el servidor."
+    explanation: "La seguridad es el pilar del Backend. Nunca se debe cifrar información sensible en el navegador del usuario (Frontend) porque el código es visible. El servidor realiza este proceso en un entorno privado y seguro antes de guardar los datos."
   },
   {
     id: 3,
     task: "Detectar si el usuario está navegando desde un iPhone o un Android.",
     correct: 'frontend',
-    explanation: "El cliente detecta el entorno del navegador para ajustar la interfaz."
+    explanation: "El Frontend tiene acceso inmediato a las propiedades del navegador (User Agent). Esto permite que la aplicación adapte el diseño al instante, mostrando una interfaz optimizada para móvil o computadora según el dispositivo detectado."
   },
   {
     id: 4,
     task: "Decidir si un pago con tarjeta de crédito es aprobado o rechazado.",
     correct: 'backend',
-    explanation: "La lógica de negocio y la comunicación con bancos es tarea del Backend."
+    explanation: "Esta es una 'Lógica de Negocio' crítica. Solo el Backend puede comunicarse de forma segura con pasarelas de pago externas y bancos. Si esta decisión se tomara en el Frontend, un usuario malintencionado podría manipular el código para auto-aprobarse el pago."
   },
   {
     id: 5,
     task: "Programar un 'Contador' que aumenta cada vez que haces clic en un botón.",
     correct: 'frontend',
-    explanation: "La interactividad inmediata en la pantalla se maneja con JavaScript en el Frontend."
+    explanation: "La interactividad inmediata en la pantalla se maneja con JavaScript en el Frontend. Si el número no necesita guardarse para siempre en una base de datos, el navegador puede actualizar la interfaz al instante sin molestar al servidor."
   },
   {
     id: 6,
     task: "Enviar una respuesta '404 Not Found' cuando una página no existe.",
     correct: 'backend',
-    explanation: "Los códigos de estado HTTP son generados por el servidor para informar al cliente."
+    explanation: "Cuando el navegador pide una URL, el Backend busca ese recurso en el servidor. Si el archivo o los datos no existen, es responsabilidad del servidor informar oficialmente al cliente mediante un 'Código de Estado HTTP' como el 404."
   },
   {
     id: 7,
     task: "Almacenar los archivos PDF que suben los usuarios a la nube.",
     correct: 'backend',
-    explanation: "La persistencia de archivos y la gestión de almacenamiento es Backend."
+    explanation: "El Backend gestiona la 'Persistencia' y el almacenamiento. Mientras el Frontend proporciona el botón de 'Subir', el servidor es quien recibe el archivo, verifica que no sea un virus, lo renombra y lo guarda físicamente en un disco o servicio de nube."
   },
   {
     id: 8,
     task: "Validar que un correo electrónico tenga un símbolo '@' antes de enviarlo.",
     correct: 'frontend',
-    explanation: "Se hace en el Frontend para dar feedback rápido al usuario antes de molestar al servidor."
+    explanation: "Hacer validaciones simples en el Frontend mejora la experiencia del usuario (UX). Al detectar errores de escritura al instante, evitamos que el usuario espere una respuesta del servidor para algo tan básico como un error de formato."
   },
   {
     id: 9,
     task: "Configurar las 'Variables de Entorno' para conectar con la Base de Datos.",
     correct: 'backend',
-    explanation: "La configuración de infraestructura y secretos del sistema vive en el Backend."
+    explanation: "Las credenciales de acceso (usuario y contraseña) a la base de datos son secretos de estado. Estas configuraciones viven exclusivamente en el Backend para que ningún usuario externo pueda verlas ni acceder a la información privada del sistema."
   },
   {
     id: 10,
     task: "Controlar el acceso (CORS) para que solo apps autorizadas usen tus datos.",
     correct: 'backend',
-    explanation: "La seguridad de acceso a la API es una política configurada en el servidor."
+    explanation: "CORS es una política de seguridad que el servidor impone. El Backend actúa como un portero que decide, basándose en reglas de origen, qué aplicaciones externas tienen permiso de consumir su API y cuáles deben ser bloqueadas por seguridad."
   }
 ];
 
