@@ -58,7 +58,7 @@ public ResponseEntity<?> authenticate(@RequestBody LoginRequest req) {
                 type="text" 
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin"
+                placeholder="Escribe el usuario..."
                 className="w-full bg-slate-950 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:border-blue-500 outline-none transition-all"
               />
             </div>
@@ -85,23 +85,6 @@ public ResponseEntity<?> authenticate(@RequestBody LoginRequest req) {
             <Send size={20} /> INICIAR SESIÓN
           </button>
         </form>
-
-        {/* NOTA DE CREDENCIALES PARA LA EXPOSICIÓN */}
-        <div className="mt-8 p-6 bg-blue-500/5 border border-blue-500/10 rounded-2xl text-left relative z-10">
-          <div className="flex items-center gap-2 text-blue-400 font-black text-xs uppercase tracking-widest mb-3">
-            <Info size={14} /> Prueba estas credenciales:
-          </div>
-          <div className="flex gap-6">
-            <div>
-              <span className="text-slate-500 text-[10px] font-bold uppercase block">Usuario</span>
-              <code className="text-white font-mono bg-white/5 px-2 py-1 rounded">admin</code>
-            </div>
-            <div>
-              <span className="text-slate-500 text-[10px] font-bold uppercase block">Contraseña</span>
-              <code className="text-white font-mono bg-white/5 px-2 py-1 rounded">1234</code>
-            </div>
-          </div>
-        </div>
 
         {status !== 'idle' && (
           <div className={`mt-6 p-4 rounded-xl flex items-center gap-3 font-bold animate-slideUp ${status === 'success' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
@@ -131,7 +114,6 @@ public ResponseEntity<?> authenticate(@RequestBody LoginRequest req) {
           </div>
           <pre className="text-indigo-300 leading-relaxed">
             {javaCode.split('\n').map((line, i) => {
-              // Simulación simple de resaltado de sintaxis
               const highlighted = line
                 .replace(/@\w+/g, '<span class="text-pink-500">$&</span>')
                 .replace(/public|String|return|new|if|else/g, '<span class="text-orange-400">$&</span>')

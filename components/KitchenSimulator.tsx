@@ -2,31 +2,37 @@
 import React, { useState } from 'react';
 import { Globe, Server, Database, ArrowRight, Monitor, Activity, RefreshCw } from 'lucide-react';
 import { FlowStep } from '../types';
+import { soundService } from '../services/soundService';
 
 const RequestFlowSimulator: React.FC = () => {
   const [step, setStep] = useState<FlowStep>(FlowStep.IDLE);
   const [log, setLog] = useState<string>("Sistema en espera. Listo para recibir un pedido...");
 
   const startProcess = () => {
+    soundService.playStart();
     setStep(FlowStep.REQUESTING);
     setLog("CLIENTE: Enviando 'Pedido' (Petición HTTP) al servidor.");
     
     setTimeout(() => {
+      soundService.playProcess();
       setStep(FlowStep.PROCESSING);
       setLog("SERVIDOR: Revisando pedido, validando usuario y ejecutando lógica.");
     }, 2000);
 
     setTimeout(() => {
+      soundService.playProcess();
       setStep(FlowStep.RETRIEVING);
       setLog("BASE DE DATOS: Buscando los 'Ingredientes' (Datos) solicitados.");
     }, 4000);
 
     setTimeout(() => {
+      soundService.playProcess();
       setStep(FlowStep.COMPLETING);
       setLog("SERVIDOR: Empacando respuesta y enviándola de vuelta al cliente.");
     }, 6000);
 
     setTimeout(() => {
+      soundService.playCorrect();
       setStep(FlowStep.IDLE);
       setLog("COMPLETADO: El usuario ya puede ver el resultado en su pantalla.");
     }, 9000);

@@ -1,201 +1,268 @@
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Server, 
-  Monitor, 
   Code2, 
   Gamepad2, 
-  ArrowDown,
-  Users,
-  Zap,
-  Cpu,
-  ChefHat,
-  Utensils,
-  Clock,
-  ShieldCheck,
-  Lock
+  ArrowLeft,
+  BookOpen,
+  ArrowRight,
+  Sparkles,
+  Lock,
+  ChevronRight
 } from 'lucide-react';
 import RequestFlowSimulator from './components/KitchenSimulator';
 import TechStack from './components/TechStack';
 import GameChallenge from './components/GameChallenge';
 import LoginExample from './components/LoginExample';
+import { Utensils, ChefHat, Zap, ShieldCheck } from 'lucide-react';
 
-const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
-  <section id={id} className={`min-h-screen w-full flex flex-col justify-center items-center py-24 px-6 md:px-20 ${className}`}>
-    {children}
-  </section>
-);
+type View = 'interactive' | 'learning';
+
+// Componente para animaciones de scroll sutiles
+const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setIsVisible(true), delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return (
+    <div ref={ref} className={`reveal ${isVisible ? 'reveal-visible' : ''}`}>
+      {children}
+    </div>
+  );
+};
 
 const App: React.FC = () => {
+  const [view, setView] = useState<View>('interactive');
+
+  const goToLearning = () => {
+    setView('learning');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goToInteractive = () => {
+    setView('interactive');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="w-full relative">
-      {/* Header Fijo */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-[#020617]/80 backdrop-blur-md border-b border-white/5 px-8 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <Server size={24} className="text-indigo-500" />
-          <span className="brand-title text-xl text-white">BACKEND<span className="brand-accent">EXPLORER</span></span>
+    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-indigo-500/30">
+      {/* Barra de Navegación */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#020617]/80 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={goToInteractive}>
+            <div className="bg-indigo-600 p-1.5 rounded-lg shadow-lg shadow-indigo-600/20">
+              <Server size={20} className="text-white" />
+            </div>
+            <span className="brand-title text-xl text-white tracking-tighter">BACKEND<span className="text-indigo-500">CORE</span></span>
+          </div>
+          
+          {view === 'interactive' ? (
+            <button 
+              onClick={goToLearning}
+              className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 px-5 py-2.5 rounded-full border border-white/10 transition-all text-sm font-bold text-white"
+            >
+              <BookOpen size={18} className="text-indigo-400" />
+              CENTRO DE APRENDIZAJE
+              <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          ) : (
+            <button 
+              onClick={goToInteractive}
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded-full shadow-xl shadow-indigo-600/20 transition-all text-sm font-bold text-white"
+            >
+              <ArrowLeft size={18} />
+              VOLVER AL SIMULADOR
+            </button>
+          )}
         </div>
       </nav>
 
-      {/* 1. PORTADA */}
-      <Section id="inicio" className="text-center">
-        <div className="bg-indigo-600 text-white p-8 rounded-[3rem] shadow-3xl shadow-indigo-500/20 mb-12 animate-bounce">
-          <Server size={100} />
-        </div>
-        <h1 className="brand-title text-7xl md:text-[10rem] tracking-tighter leading-none text-white mb-6">
-          BACKEND<span className="brand-accent">EXPLORER</span>
-        </h1>
-        <p className="text-2xl md:text-3xl text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed mb-16">
-          Guía interactiva sobre el motor que procesa, protege y conecta el mundo digital.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl mb-12">
-          <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
-            <span className="block text-indigo-400 font-black text-sm uppercase tracking-widest mb-2">Expositor</span>
-            <span className="text-xl font-bold text-white">Alexander Ruilova</span>
+      <main className="pt-24 pb-20 px-6">
+        {view === 'interactive' ? (
+          <div className="max-w-6xl mx-auto space-y-32">
+            {/* Hero Section */}
+            <header className="text-center space-y-8 py-12">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 px-4 py-2 rounded-full text-indigo-400 text-xs font-black tracking-widest uppercase animate-fade-in">
+                  <Sparkles size={14} />
+                  Experiencia Interactiva 2025
+                </div>
+              </Reveal>
+              <Reveal delay={100}>
+                <h1 className="serif text-6xl md:text-9xl text-white leading-none tracking-tighter">
+                  Domina el <span className="text-indigo-500">Backend.</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={200}>
+                <p className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                  El Frontend es lo que ves, el Backend es lo que lo hace realidad. Experimenta la lógica del servidor en tiempo real.
+                </p>
+              </Reveal>
+            </header>
+
+            {/* Login Section */}
+            <section id="login-demo" className="scroll-mt-32">
+              <Reveal>
+                <div className="flex flex-col items-center mb-12 text-center">
+                  <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center border border-white/5 mb-6">
+                    <Lock className="text-indigo-500" />
+                  </div>
+                  <h2 className="text-4xl font-black text-white mb-4">Caso Real: El Login</h2>
+                  <p className="text-slate-400 max-w-xl">
+                    Observa cómo el Backend procesa la seguridad mientras el Frontend mantiene una interfaz amigable.
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={150}>
+                <LoginExample />
+              </Reveal>
+            </section>
+
+            {/* Game Section */}
+            <section id="challenge" className="scroll-mt-32">
+              <Reveal>
+                <div className="flex flex-col items-center mb-12 text-center">
+                  <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center border border-white/5 mb-6">
+                    <Gamepad2 className="text-indigo-500" />
+                  </div>
+                  <h2 className="text-4xl font-black text-white mb-4">¡Ponte a Prueba!</h2>
+                  <p className="text-slate-400 max-w-xl">
+                    ¿Eres capaz de distinguir las tareas del motor interno de una aplicación?
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={150}>
+                <div className="bg-slate-900/40 backdrop-blur-sm border border-white/5 p-8 md:p-16 rounded-[3.5rem] shadow-2xl">
+                  <GameChallenge isEmbedded={true} />
+                </div>
+              </Reveal>
+            </section>
+
+            {/* Call to Action Final */}
+            <Reveal>
+              <section className="bg-indigo-600 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.2),transparent)]"></div>
+                <h2 className="serif text-5xl md:text-7xl text-white mb-8 relative z-10">¿Quieres dominar el núcleo del Backend?</h2>
+                <p className="text-indigo-100 text-xl md:text-2xl mb-12 max-w-3xl mx-auto relative z-10 opacity-90 leading-relaxed">
+                  Explora nuestra guía completa sobre arquitectura, flujo de datos y lenguajes de servidor (usando el ejemplo de la cocina para entenderlo fácilmente).
+                </p>
+                <button 
+                  onClick={goToLearning}
+                  className="bg-white text-indigo-600 px-10 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-2xl relative z-10 inline-flex items-center gap-3"
+                >
+                  IR AL CENTRO DE APRENDIZAJE
+                  <ArrowRight size={20} />
+                </button>
+              </section>
+            </Reveal>
           </div>
-          <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
-            <span className="block text-indigo-400 font-black text-sm uppercase tracking-widest mb-2">Expositor</span>
-            <span className="text-xl font-bold text-white">Pablo Ortega</span>
-          </div>
-          <div className="bg-white/5 border border-white/10 p-6 rounded-3xl">
-            <span className="block text-indigo-400 font-black text-sm uppercase tracking-widest mb-2">Expositor</span>
-            <span className="text-xl font-bold text-white">Jessica Ortiz</span>
-          </div>
-        </div>
-        <div className="animate-pulse flex flex-col items-center gap-2 text-slate-500">
-           <span className="text-xs font-black tracking-widest">SCROLL PARA EXPLORAR</span>
-           <ArrowDown size={20} />
-        </div>
-      </Section>
+        ) : (
+          <div className="max-w-6xl mx-auto animate-fade-in space-y-32">
+            {/* Header Learning */}
+            <header className="py-12 border-b border-white/5">
+              <Reveal>
+                <h1 className="serif text-6xl md:text-8xl text-white mb-6">Teoría & <span className="text-indigo-500">Fundamentos</span></h1>
+                <p className="text-xl text-slate-400 max-w-3xl">Todo lo que necesitas saber para convertirte en un arquitecto del software.</p>
+              </Reveal>
+            </header>
 
-      {/* 2. ANALOGÍA DEL RESTAURANTE */}
-      <Section id="definicion" className="bg-slate-950/30">
-        <h2 className="serif text-5xl md:text-8xl mb-12 text-center text-white">Entendiendo el <span className="text-indigo-500">Backend</span></h2>
-        
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Comedor - Frontend */}
-          <div className="bg-slate-900/50 p-10 rounded-[3rem] border border-white/5 flex flex-col items-center text-center">
-            <div className="bg-blue-600/20 p-6 rounded-3xl text-blue-400 mb-6"><Utensils size={48} /></div>
-            <h3 className="text-2xl font-black text-white mb-4">El Comedor (Frontend)</h3>
-            <p className="text-slate-400 leading-relaxed text-lg">
-              Es el área donde se sientan los clientes. Es el diseño, las mesas, la decoración y el menú que tú puedes ver y tocar.
-            </p>
-          </div>
-
-          {/* Mesero - API/Protocolo */}
-          <div className="bg-indigo-600/20 p-10 rounded-[3rem] border border-indigo-500/20 flex flex-col items-center text-center relative">
-            <div className="bg-indigo-600 p-6 rounded-3xl text-white mb-6 animate-pulse"><Zap size={48} /></div>
-            <h3 className="text-2xl font-black text-white mb-4">El Mesero (Conexión)</h3>
-            <p className="text-slate-200 leading-relaxed text-lg">
-              Lleva tu pedido del comedor a la cocina y trae tu comida de vuelta. Sin él, la cocina y el cliente no pueden comunicarse.
-            </p>
-          </div>
-
-          {/* Cocina - Backend */}
-          <div className="bg-slate-900/50 p-10 rounded-[3rem] border border-white/5 flex flex-col items-center text-center">
-            <div className="bg-red-600/20 p-6 rounded-3xl text-red-400 mb-6"><ChefHat size={48} /></div>
-            <h3 className="text-2xl font-black text-white mb-4">La Cocina (Backend)</h3>
-            <p className="text-slate-400 leading-relaxed text-lg">
-              Donde ocurre la magia. Los chefs (servidores) preparan los platos usando ingredientes (datos) según las recetas (lógica).
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-16 bg-slate-900 border border-white/10 p-10 rounded-[4rem] max-w-4xl w-full shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 right-0 p-8 opacity-10">
-            <Server size={120} />
-          </div>
-          <h4 className="text-2xl font-black text-indigo-400 mb-6 flex items-center gap-3 italic">
-            <ShieldCheck /> Lo que el Backend hace por ti:
-          </h4>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xl text-slate-300">
-            <li className="flex items-start gap-4">
-              <span className="bg-indigo-500 w-3 h-3 rounded-full mt-2 shrink-0"></span>
-              <span><strong>Seguridad:</strong> Verifica que seas quien dices ser (Login).</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="bg-indigo-500 w-3 h-3 rounded-full mt-2 shrink-0"></span>
-              <span><strong>Almacenamiento:</strong> Guarda tus fotos, mensajes y progreso.</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="bg-indigo-500 w-3 h-3 rounded-full mt-2 shrink-0"></span>
-              <span><strong>Lógica:</strong> Calcula precios, descuentos o rutas de GPS.</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="bg-indigo-500 w-3 h-3 rounded-full mt-2 shrink-0"></span>
-              <span><strong>Integración:</strong> Conecta con bancos para procesar pagos.</span>
-            </li>
-          </ul>
-        </div>
-      </Section>
-
-      {/* 3. FLUJO INTERACTIVO */}
-      <Section id="flujo">
-        <div className="text-center mb-16 max-w-3xl">
-          <h2 className="serif text-5xl md:text-8xl mb-6 text-white">Flujo de Petición</h2>
-          <p className="text-2xl text-slate-400">Observa en tiempo real cómo interactúan el cliente, el servidor y la base de datos.</p>
-        </div>
-        <div className="w-full max-w-6xl">
-          <RequestFlowSimulator />
-        </div>
-      </Section>
-
-      {/* 4. TECNOLOGÍAS */}
-      <Section id="tecnologias" className="bg-slate-950/30">
-        <h2 className="serif text-5xl md:text-8xl mb-20 text-center text-white">El Kit de Herramientas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
-           <TechStack isDark={true} />
-        </div>
-      </Section>
-
-      {/* 5. EJEMPLO PRÁCTICO: LOGIN (NUEVO) */}
-      <Section id="login-demo" className="bg-indigo-950/10">
-        <div className="text-center mb-16 max-w-4xl">
-          <Lock size={80} className="text-indigo-500 mx-auto mb-6" />
-          <h2 className="serif text-5xl md:text-8xl mb-6 text-white">Caso Real: <span className="text-indigo-500">El Login</span></h2>
-          <p className="text-2xl text-slate-400">
-            Mira la diferencia entre lo que el usuario ve (Frontend) y cómo el servidor (Backend Java) procesa la seguridad.
-          </p>
-        </div>
-        <LoginExample />
-      </Section>
-
-      {/* 6. JUEGO */}
-      <Section id="juego">
-        <div className="text-center mb-16">
-          <Gamepad2 size={80} className="text-indigo-500 mx-auto mb-6" />
-          <h2 className="serif text-5xl md:text-8xl mb-4 text-white">¡Desafío Backend!</h2>
-          <p className="text-2xl text-slate-400">¿Sabes distinguir qué parte de la app se encarga de cada tarea?</p>
-        </div>
-        <div className="w-full max-w-4xl bg-slate-900/50 p-12 rounded-[4rem] border border-white/5 shadow-inner">
-           <GameChallenge isEmbedded={true} />
-        </div>
-      </Section>
-
-      {/* FOOTER / CRÉDITOS */}
-      <footer className="w-full bg-slate-950 py-32 px-10 border-t border-white/5 text-center">
-        <h2 className="serif text-8xl md:text-[12rem] font-black text-white tracking-tighter mb-10">¡Gracias!</h2>
-        <p className="text-3xl text-slate-500 font-bold mb-20 uppercase tracking-[0.2em]">Casa Abierta 2025 • Computación</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 w-full max-w-6xl mx-auto mb-24">
-          {[
-            { name: 'Alexander Ruilova', icon: <Users /> },
-            { name: 'Pablo Ortega', icon: <Cpu /> },
-            { name: 'Jessica Ortiz', icon: <Zap /> }
-          ].map((m, i) => (
-            <div key={i} className="group">
-              <div className="w-48 h-48 bg-slate-900 rounded-[4rem] mx-auto flex items-center justify-center text-indigo-500 border border-white/5 transition-all group-hover:bg-indigo-600 group-hover:text-white group-hover:-translate-y-4 shadow-xl">
-                {React.cloneElement(m.icon as React.ReactElement<any>, { size: 80 })}
+            {/* Analogía Restaurante */}
+            <section className="space-y-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <Reveal delay={0}>
+                  <div className="bg-slate-900/50 p-10 rounded-[2.5rem] border border-white/5 h-full">
+                    <Utensils className="text-blue-500 mb-6" size={40} />
+                    <h3 className="text-2xl font-bold text-white mb-4">El Comedor</h3>
+                    <p className="text-slate-400 leading-relaxed">El Frontend. Donde el cliente interactúa, ve el diseño y elige opciones.</p>
+                  </div>
+                </Reveal>
+                <Reveal delay={150}>
+                  <div className="bg-indigo-600/10 p-10 rounded-[2.5rem] border border-indigo-500/20 shadow-lg shadow-indigo-600/5 h-full">
+                    <Zap className="text-indigo-400 mb-6" size={40} />
+                    <h3 className="text-2xl font-bold text-white mb-4">El Mesero</h3>
+                    <p className="text-slate-200 leading-relaxed">La API. Transporta las peticiones del comedor a la cocina y trae los resultados.</p>
+                  </div>
+                </Reveal>
+                <Reveal delay={300}>
+                  <div className="bg-slate-900/50 p-10 rounded-[2.5rem] border border-white/5 h-full">
+                    <ChefHat className="text-red-500 mb-6" size={40} />
+                    <h3 className="text-2xl font-bold text-white mb-4">La Cocina</h3>
+                    <p className="text-slate-400 leading-relaxed">El Backend. Se procesan los ingredientes (datos) bajo reglas estrictas (lógica).</p>
+                  </div>
+                </Reveal>
               </div>
-              <h4 className="text-3xl font-black text-white mt-8 mb-2">{m.name}</h4>
-              <p className="text-indigo-500 font-black uppercase tracking-widest text-xs">Expositor del Proyecto</p>
-            </div>
-          ))}
-        </div>
-        
-        <div className="flex items-center justify-center gap-4 pt-10 border-t border-white/5 opacity-30">
-          <Server size={20} />
-          <span className="brand-title text-xl text-white">BACKEND<span className="brand-accent">EXPLORER</span></span>
+            </section>
+
+            {/* Flujo de Petición */}
+            <section className="space-y-12">
+              <Reveal>
+                <div className="flex items-center gap-4">
+                  <div className="bg-indigo-600 p-3 rounded-2xl text-white"><Code2 size={24} /></div>
+                  <h2 className="text-4xl font-black text-white">Ciclo de Vida de una Petición</h2>
+                </div>
+              </Reveal>
+              <Reveal delay={150}>
+                <RequestFlowSimulator />
+              </Reveal>
+            </section>
+
+            {/* Lenguajes / Stack */}
+            <section className="space-y-12 pb-20">
+              <Reveal>
+                <div className="flex flex-col items-center text-center space-y-4 mb-12">
+                  <h2 className="text-4xl font-black text-white">Herramientas del Arquitecto</h2>
+                  <p className="text-slate-400 max-w-xl">Diferentes lenguajes para diferentes necesidades. Cada uno tiene su superpoder en el servidor.</p>
+                </div>
+              </Reveal>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <TechStack isDark={true} />
+              </div>
+            </section>
+
+            {/* Resumen Final */}
+            <Reveal>
+              <section className="bg-slate-900 p-10 rounded-[3rem] border border-white/10 max-w-4xl mx-auto shadow-2xl">
+                <h4 className="text-2xl font-black text-indigo-400 mb-8 flex items-center gap-3 italic">
+                  <ShieldCheck /> Lo que el Backend hace por ti:
+                </h4>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg text-slate-300">
+                  <li className="flex gap-4"><span className="text-indigo-500">●</span> <strong>Seguridad:</strong> Verifica tu identidad.</li>
+                  <li className="flex gap-4"><span className="text-indigo-500">●</span> <strong>Persistencia:</strong> Guarda tu progreso.</li>
+                  <li className="flex gap-4"><span className="text-indigo-500">●</span> <strong>Lógica:</strong> Realiza cálculos complejos.</li>
+                  <li className="flex gap-4"><span className="text-indigo-500">●</span> <strong>Escalabilidad:</strong> Soporta millones de usuarios.</li>
+                </ul>
+              </section>
+            </Reveal>
+          </div>
+        )}
+      </main>
+
+      <footer className="w-full border-t border-white/5 py-12 px-6 bg-slate-950/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <Server size={20} className="text-indigo-500" />
+            <span className="brand-title text-lg text-white">BACKEND<span className="text-indigo-500">CORE</span></span>
+          </div>
+          <p className="text-slate-500 text-sm font-bold tracking-widest uppercase">Casa Abierta 2025 • Alexander • Pablo • Jessica</p>
+          <div className="flex gap-4">
+             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10"></div>
+             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10"></div>
+          </div>
         </div>
       </footer>
     </div>
