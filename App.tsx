@@ -9,17 +9,22 @@ import {
   ArrowRight,
   Sparkles,
   Lock,
-  ChevronRight
+  ChevronRight,
+  Database,
+  ShieldCheck,
+  Cpu,
+  Globe,
+  Zap,
+  Utensils,
+  ChefHat
 } from 'lucide-react';
 import RequestFlowSimulator from './components/KitchenSimulator';
 import TechStack from './components/TechStack';
 import GameChallenge from './components/GameChallenge';
 import LoginExample from './components/LoginExample';
-import { Utensils, ChefHat, Zap, ShieldCheck } from 'lucide-react';
 
 type View = 'interactive' | 'learning';
 
-// Componente para animaciones de scroll sutiles
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -61,7 +66,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-indigo-500/30">
-      {/* Barra de Navegación */}
       <nav className="fixed top-0 left-0 w-full z-50 bg-[#020617]/80 backdrop-blur-xl border-b border-white/5 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2 cursor-pointer" onClick={goToInteractive}>
@@ -95,7 +99,6 @@ const App: React.FC = () => {
       <main className="pt-24 pb-20 px-6">
         {view === 'interactive' ? (
           <div className="max-w-6xl mx-auto space-y-32">
-            {/* Hero Section */}
             <header className="text-center space-y-8 py-12">
               <Reveal>
                 <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 px-4 py-2 rounded-full text-indigo-400 text-xs font-black tracking-widest uppercase animate-fade-in">
@@ -115,7 +118,6 @@ const App: React.FC = () => {
               </Reveal>
             </header>
 
-            {/* Login Section */}
             <section id="login-demo" className="scroll-mt-32">
               <Reveal>
                 <div className="flex flex-col items-center mb-12 text-center">
@@ -133,7 +135,6 @@ const App: React.FC = () => {
               </Reveal>
             </section>
 
-            {/* Game Section */}
             <section id="challenge" className="scroll-mt-32">
               <Reveal>
                 <div className="flex flex-col items-center mb-12 text-center">
@@ -153,13 +154,12 @@ const App: React.FC = () => {
               </Reveal>
             </section>
 
-            {/* Call to Action Final */}
             <Reveal>
               <section className="bg-indigo-600 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.2),transparent)]"></div>
                 <h2 className="serif text-5xl md:text-7xl text-white mb-8 relative z-10">¿Quieres dominar el núcleo del Backend?</h2>
                 <p className="text-indigo-100 text-xl md:text-2xl mb-12 max-w-3xl mx-auto relative z-10 opacity-90 leading-relaxed">
-                  Explora nuestra guía completa sobre arquitectura, flujo de datos y lenguajes de servidor (usando el ejemplo de la cocina para entenderlo fácilmente).
+                  Explora nuestra guía completa sobre arquitectura, flujo de datos y lenguajes de servidor de forma sencilla.
                 </p>
                 <button 
                   onClick={goToLearning}
@@ -173,7 +173,6 @@ const App: React.FC = () => {
           </div>
         ) : (
           <div className="max-w-6xl mx-auto animate-fade-in space-y-32">
-            {/* Header Learning */}
             <header className="py-12 border-b border-white/5">
               <Reveal>
                 <h1 className="serif text-6xl md:text-8xl text-white mb-6">Teoría & <span className="text-indigo-500">Fundamentos</span></h1>
@@ -181,8 +180,102 @@ const App: React.FC = () => {
               </Reveal>
             </header>
 
-            {/* Analogía Restaurante */}
+            {/* NUEVA SECCIÓN: ¿Qué es el Backend? */}
             <section className="space-y-16">
+              <Reveal>
+                <div className="text-center space-y-4 mb-16">
+                  <h2 className="text-4xl md:text-5xl font-black text-white italic">¿Qué es realmente el Backend?</h2>
+                  <p className="text-slate-400 text-lg max-w-3xl mx-auto">
+                    El Backend es el <strong>cerebro invisible</strong> detrás de cada aplicación. Mientras el Frontend se encarga de que todo se vea bien, el Backend se asegura de que todo funcione correctamente, sea seguro y los datos se guarden para siempre.
+                  </p>
+                </div>
+              </Reveal>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <Reveal delay={0}>
+                  <div className="bg-slate-900/40 p-10 rounded-[2.5rem] border border-white/5 hover:border-indigo-500/30 transition-colors h-full flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-indigo-600/20 rounded-2xl flex items-center justify-center text-indigo-400 mb-6">
+                      <Cpu size={32} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 uppercase tracking-tighter">1. El Motor (Lógica)</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      Es el código que toma decisiones. Por ejemplo: "¿Esta contraseña es correcta?" o "¿Tiene este usuario dinero suficiente para la compra?".
+                    </p>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={150}>
+                  <div className="bg-slate-900/40 p-10 rounded-[2.5rem] border border-white/5 hover:border-green-500/30 transition-colors h-full flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-green-600/20 rounded-2xl flex items-center justify-center text-green-400 mb-6">
+                      <Database size={32} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 uppercase tracking-tighter">2. La Memoria (DB)</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      Donde se guardan tus fotos, mensajes y perfil. Sin el Backend, al cerrar la aplicación todo se borraría para siempre.
+                    </p>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={300}>
+                  <div className="bg-slate-900/40 p-10 rounded-[2.5rem] border border-white/5 hover:border-red-500/30 transition-colors h-full flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-red-600/20 rounded-2xl flex items-center justify-center text-red-400 mb-6">
+                      <ShieldCheck size={32} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 uppercase tracking-tighter">3. El Guardián</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      El Backend protege tus datos. Evita que extraños entren a tu cuenta o que se robe información privada de la empresa.
+                    </p>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* El Ciclo de Petición Explicado */}
+              <Reveal>
+                <div className="bg-indigo-600/5 border border-indigo-500/20 rounded-[3.5rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
+                  <div className="md:w-1/2 space-y-6">
+                    <h3 className="text-3xl font-black text-white">¿Cómo se comunican?</h3>
+                    <p className="text-slate-400 leading-relaxed">
+                      Imagina que el Frontend es un <strong>Turista</strong> y el Backend es un <strong>Guía Local</strong>. 
+                      El turista hace una <strong>Petición (Request)</strong> preguntando dónde está el museo. 
+                      El guía piensa, busca en su mapa y le da una <strong>Respuesta (Response)</strong> con la dirección exacta.
+                    </p>
+                    <div className="flex gap-4">
+                      <div className="flex flex-col">
+                        <span className="text-xs font-black text-indigo-500 uppercase">Input</span>
+                        <span className="text-white font-bold">Request</span>
+                      </div>
+                      <div className="h-10 w-[1px] bg-white/10"></div>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-black text-green-500 uppercase">Process</span>
+                        <span className="text-white font-bold">Server Logic</span>
+                      </div>
+                      <div className="h-10 w-[1px] bg-white/10"></div>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-black text-blue-500 uppercase">Output</span>
+                        <span className="text-white font-bold">Response</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="md:w-1/2 flex justify-center">
+                    <div className="relative group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                      <div className="relative bg-slate-950 p-12 rounded-full border border-white/10 flex items-center justify-center">
+                        <Zap size={60} className="text-indigo-500 animate-pulse" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </section>
+
+            {/* SECCIÓN ANALOGÍA (Ahora viene después de la teoría) */}
+            <section className="space-y-16">
+              <Reveal>
+                <div className="flex flex-col items-center text-center space-y-4">
+                  <h2 className="text-4xl font-black text-white uppercase tracking-tighter">Entendiéndolo con una Analogía</h2>
+                  <p className="text-slate-400">Si el software fuera un restaurante...</p>
+                </div>
+              </Reveal>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <Reveal delay={0}>
                   <div className="bg-slate-900/50 p-10 rounded-[2.5rem] border border-white/5 h-full">
@@ -208,7 +301,6 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            {/* Flujo de Petición */}
             <section className="space-y-12">
               <Reveal>
                 <div className="flex items-center gap-4">
@@ -221,7 +313,6 @@ const App: React.FC = () => {
               </Reveal>
             </section>
 
-            {/* Lenguajes / Stack */}
             <section className="space-y-12 pb-20">
               <Reveal>
                 <div className="flex flex-col items-center text-center space-y-4 mb-12">
@@ -234,7 +325,6 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            {/* Resumen Final */}
             <Reveal>
               <section className="bg-slate-900 p-10 rounded-[3rem] border border-white/10 max-w-4xl mx-auto shadow-2xl">
                 <h4 className="text-2xl font-black text-indigo-400 mb-8 flex items-center gap-3 italic">
