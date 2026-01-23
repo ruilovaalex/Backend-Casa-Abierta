@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Trophy, CheckCircle2, XCircle, RefreshCw, Zap, Award, User, Star, ChevronRight } from 'lucide-react';
 import { GameScenario } from '../types';
