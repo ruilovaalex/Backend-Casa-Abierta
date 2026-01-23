@@ -20,7 +20,23 @@ const allScenarios: GameScenario[] = [
   { id: 11, task: "Crear una animación 3D al pasar el ratón sobre una imagen.", correct: 'frontend', explanation: "Efectos visuales y animaciones CSS/JS ocurren directamente en el navegador." },
   { id: 12, task: "Configurar el certificado SSL/TLS para una conexión HTTPS segura.", correct: 'backend', explanation: "La seguridad a nivel de red y servidor se gestiona en el entorno del Backend." },
   { id: 13, task: "Gestionar los tiempos de caché para que las imágenes carguen más rápido.", correct: 'backend', explanation: "El servidor define cabeceras HTTP de caché para optimizar la entrega de recursos." },
-  { id: 14, task: "Personalizar la tipografía de los títulos principales.", correct: 'frontend', explanation: "Los estilos visuales y la tipografía son definidos por CSS en el Frontend." }
+  { id: 14, task: "Personalizar la tipografía de los títulos principales.", correct: 'frontend', explanation: "Los estilos visuales y la tipografía son definidos por CSS en el Frontend." },
+  { id: 15, task: "Implementar un modal de confirmación con animación de entrada.", correct: 'frontend', explanation: "Los modales y sus animaciones se manejan en el navegador con JavaScript y CSS." },
+  { id: 16, task: "Generar reportes PDF a partir de datos de la base de datos.", correct: 'backend', explanation: "El procesamiento de documentos y acceso a la base de datos ocurre en el servidor." },
+  { id: 17, task: "Hacer responsive un diseño para tablets y móviles.", correct: 'frontend', explanation: "Media queries y diseño adaptativo son parte del CSS en el Frontend." },
+  { id: 18, task: "Implementar autenticación con JWT (JSON Web Tokens).", correct: 'backend', explanation: "La generación y validación de tokens de seguridad se hace en el servidor." },
+  { id: 19, task: "Mostrar un spinner de carga mientras se obtienen datos.", correct: 'frontend', explanation: "Los estados de carga y feedback visual son responsabilidad del Frontend." },
+  { id: 20, task: "Configurar CORS para permitir peticiones desde otros dominios.", correct: 'backend', explanation: "CORS es una política de seguridad que se configura en el servidor." },
+  { id: 21, task: "Implementar drag & drop para reorganizar elementos en una lista.", correct: 'frontend', explanation: "Las interacciones de arrastrar y soltar se manejan con JavaScript en el navegador." },
+  { id: 22, task: "Ejecutar trabajos programados (cron jobs) para limpiar datos antiguos.", correct: 'backend', explanation: "Las tareas automatizadas y programadas se ejecutan en el servidor." },
+  { id: 23, task: "Crear un carrusel de imágenes con navegación.", correct: 'frontend', explanation: "Los componentes interactivos visuales son parte del Frontend." },
+  { id: 24, task: "Integrar un sistema de envío de emails transaccionales.", correct: 'backend', explanation: "El envío de correos y la integración con servicios externos ocurre en el Backend." },
+  { id: 25, task: "Implementar validación en tiempo real de disponibilidad de nombre de usuario.", correct: 'frontend', explanation: "Aunque consulta al backend, la interacción inmediata y el feedback visual son del Frontend." },
+  { id: 26, task: "Configurar una base de datos relacional con migraciones.", correct: 'backend', explanation: "La gestión de bases de datos y su estructura es responsabilidad del Backend." },
+  { id: 27, task: "Añadir efectos de parallax al hacer scroll en la página.", correct: 'frontend', explanation: "Los efectos visuales basados en scroll se implementan con JavaScript/CSS." },
+  { id: 28, task: "Implementar logging y monitoreo de errores del servidor.", correct: 'backend', explanation: "El registro de eventos y monitoreo del sistema ocurre en el Backend." },
+  { id: 29, task: "Crear un formulario con validación de campos en múltiples pasos.", correct: 'frontend', explanation: "La navegación entre pasos y validación visual es tarea del Frontend." },
+  { id: 30, task: "Implementar un sistema de cola de mensajes para procesar tareas pesadas.", correct: 'backend', explanation: "Los sistemas de colas y procesamiento asíncrono son infraestructura de Backend." }
 ];
 
 const BOSS_QUESTION: GameScenario = {
