@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Trophy, CheckCircle2, XCircle, RefreshCw, Zap, Award, User, Star, ChevronRight } from 'lucide-react';
 import { GameScenario } from '../types';
@@ -124,57 +123,21 @@ const GameChallenge: React.FC<{ isEmbedded?: boolean }> = () => {
             </div>
             <div className="space-y-3">
               <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-2">Nombre Completo</label>
-              <input 
-                required 
-                type="text" 
-                value={userName} 
-                onChange={(e) => setUserName(e.target.value)} 
-                className="w-full bg-slate-950 border border-white/10 rounded-2xl py-5 px-6 text-xl text-white outline-none focus:border-indigo-500 transition-all shadow-inner" 
-                placeholder="Ej. Alexander" 
-              />
+              <input required type="text" value={userName} onChange={(e) => setUserName(e.target.value)} className="w-full bg-slate-950 border border-white/10 rounded-2xl py-5 px-6 text-xl text-white outline-none focus:border-indigo-500 transition-all shadow-inner" placeholder="Ej. Alexander" />
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <button 
-                type="button" 
-                onClick={() => setDifficulty('easy')} 
-                className={`p-6 rounded-3xl border-2 transition-all flex flex-col items-center gap-2 ${
-                  difficulty === 'easy' 
-                    ? 'border-indigo-500 bg-indigo-500/10' 
-                    : 'border-white/5 bg-slate-950 hover:bg-white/5'
-                }`}
-              >
+              <button type="button" onClick={() => setDifficulty('easy')} className={`p-6 rounded-3xl border-2 transition-all flex flex-col items-center gap-2 ${difficulty === 'easy' ? 'border-indigo-500 bg-indigo-500/10' : 'border-white/5 bg-slate-950 hover:bg-white/5'}`}>
                 <p className="font-black text-white">MODO FÁCIL</p>
-                <div className="flex gap-1 text-indigo-500">
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                </div>
+                <div className="flex gap-1 text-indigo-500"><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /></div>
                 <p className="text-[10px] text-slate-500 uppercase tracking-widest">5 Preguntas</p>
               </button>
-              <button 
-                type="button" 
-                onClick={() => setDifficulty('normal')} 
-                className={`p-6 rounded-3xl border-2 transition-all flex flex-col items-center gap-2 ${
-                  difficulty === 'normal' 
-                    ? 'border-indigo-500 bg-indigo-500/10' 
-                    : 'border-white/5 bg-slate-950 hover:bg-white/5'
-                }`}
-              >
+              <button type="button" onClick={() => setDifficulty('normal')} className={`p-6 rounded-3xl border-2 transition-all flex flex-col items-center gap-2 ${difficulty === 'normal' ? 'border-indigo-500 bg-indigo-500/10' : 'border-white/5 bg-slate-950 hover:bg-white/5'}`}>
                 <p className="font-black text-white">MODO NORMAL</p>
-                <div className="flex gap-1 text-amber-500">
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                </div>
+                <div className="flex gap-1 text-amber-500"><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /></div>
                 <p className="text-[10px] text-slate-500 uppercase tracking-widest">10 Preguntas + Boss</p>
               </button>
             </div>
-            <button 
-              type="submit" 
-              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-6 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 text-2xl group active:scale-95"
-            >
+            <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-6 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 text-2xl group active:scale-95">
               COMENZAR DESAFÍO <ChevronRight className="group-hover:translate-x-2 transition-transform" />
             </button>
           </form>
@@ -189,24 +152,10 @@ const GameChallenge: React.FC<{ isEmbedded?: boolean }> = () => {
         <div className="text-center animate-fade-in space-y-12">
           <div className="bg-slate-900/60 p-16 rounded-[4rem] border border-white/5 shadow-2xl max-w-2xl mx-auto relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-indigo-500"></div>
-            <Trophy 
-              size={100} 
-              className={`mx-auto mb-8 ${
-                score === shuffledQuestions.length 
-                  ? 'text-yellow-500 animate-bounce' 
-                  : 'text-slate-600'
-              }`} 
-            />
-            <h3 className="text-5xl font-black text-white mb-2 italic uppercase tracking-tighter">
-              {score === shuffledQuestions.length ? '¡ARQUITECTO ÉLITE!' : '¡BIEN JUGADO!'}
-            </h3>
-            <p className="text-2xl text-slate-400 mb-12 font-medium">
-              {userName}, lograste <span className="text-indigo-500 font-black">{score}</span> de {shuffledQuestions.length} puntos.
-            </p>
-            <button 
-              onClick={restart} 
-              className="bg-indigo-600 hover:bg-indigo-500 text-white px-12 py-5 rounded-2xl font-black text-xl transition-all flex items-center gap-4 mx-auto shadow-2xl active:scale-95"
-            >
+            <Trophy size={100} className={`mx-auto mb-8 ${score === shuffledQuestions.length ? 'text-yellow-500 animate-bounce' : 'text-slate-600'}`} />
+            <h3 className="text-5xl font-black text-white mb-2 italic uppercase tracking-tighter">{score === shuffledQuestions.length ? '¡ARQUITECTO ÉLITE!' : '¡BIEN JUGADO!'}</h3>
+            <p className="text-2xl text-slate-400 mb-12 font-medium">{userName}, lograste <span className="text-indigo-500 font-black">{score}</span> de {shuffledQuestions.length} puntos.</p>
+            <button onClick={restart} className="bg-indigo-600 hover:bg-indigo-500 text-white px-12 py-5 rounded-2xl font-black text-xl transition-all flex items-center gap-4 mx-auto shadow-2xl active:scale-95">
               <RefreshCw size={24} /> REINTENTAR RETO
             </button>
           </div>
@@ -217,15 +166,10 @@ const GameChallenge: React.FC<{ isEmbedded?: boolean }> = () => {
             <div className="flex items-center gap-6">
               <div className="flex flex-col">
                 <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Pregunta</span>
-                <span className="text-2xl font-black text-white leading-none">
-                  {currentIdx + 1}<span className="text-slate-600 text-sm ml-1">/ {shuffledQuestions.length}</span>
-                </span>
+                <span className="text-2xl font-black text-white leading-none">{currentIdx + 1}<span className="text-slate-600 text-sm ml-1">/ {shuffledQuestions.length}</span></span>
               </div>
               <div className="h-1.5 w-48 bg-slate-800 rounded-full overflow-hidden hidden md:block">
-                <div 
-                  className="h-full bg-indigo-500 transition-all duration-500" 
-                  style={{ width: `${((currentIdx + 1) / shuffledQuestions.length) * 100}%` }}
-                ></div>
+                <div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIdx + 1) / shuffledQuestions.length) * 100}%` }}></div>
               </div>
             </div>
             <div className="text-right">
@@ -236,7 +180,7 @@ const GameChallenge: React.FC<{ isEmbedded?: boolean }> = () => {
 
           <div className="min-h-[220px] flex items-center justify-center p-12 bg-indigo-500/5 border border-indigo-500/10 rounded-[3rem] relative overflow-hidden group">
             <div className="absolute -top-10 -right-10 opacity-5 group-hover:scale-110 transition-transform text-indigo-500">
-              {shuffledQuestions[currentIdx].id === 99 ? <Zap size={200} /> : <Award size={200} />}
+               {shuffledQuestions[currentIdx].id === 99 ? <Zap size={200} /> : <Award size={200} />}
             </div>
             <h4 className="text-4xl md:text-5xl font-black text-white text-center leading-tight tracking-tighter relative z-10">
               {shuffledQuestions[currentIdx].task}
@@ -245,40 +189,22 @@ const GameChallenge: React.FC<{ isEmbedded?: boolean }> = () => {
 
           {showResult === null ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <button 
-                onClick={() => handleAnswer('frontend')} 
-                className="group relative overflow-hidden py-16 rounded-[2.5rem] bg-slate-900 border border-white/10 hover:border-blue-500/50 transition-all active:scale-95 shadow-xl"
-              >
+              <button onClick={() => handleAnswer('frontend')} className="group relative overflow-hidden py-16 rounded-[2.5rem] bg-slate-900 border border-white/10 hover:border-blue-500/50 transition-all active:scale-95 shadow-xl">
                 <div className="absolute top-0 left-0 w-2 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <span className="relative z-10 text-4xl font-black text-white group-hover:text-blue-400 tracking-tighter italic">
-                  FRONTEND
-                </span>
+                <span className="relative z-10 text-4xl font-black text-white group-hover:text-blue-400 tracking-tighter italic">FRONTEND</span>
               </button>
-              <button 
-                onClick={() => handleAnswer('backend')} 
-                className="group relative overflow-hidden py-16 rounded-[2.5rem] bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all active:scale-95 shadow-xl"
-              >
+              <button onClick={() => handleAnswer('backend')} className="group relative overflow-hidden py-16 rounded-[2.5rem] bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all active:scale-95 shadow-xl">
                 <div className="absolute top-0 left-0 w-2 h-full bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <span className="relative z-10 text-4xl font-black text-white group-hover:text-indigo-400 tracking-tighter italic">
-                  BACKEND
-                </span>
+                <span className="relative z-10 text-4xl font-black text-white group-hover:text-indigo-400 tracking-tighter italic">BACKEND</span>
               </button>
             </div>
           ) : (
-            <div className={`p-12 rounded-[3rem] border-2 animate-slide-up flex flex-col items-center gap-6 ${
-              showResult 
-                ? 'bg-green-500/5 border-green-500/20 shadow-green-500/5 shadow-2xl' 
-                : 'bg-red-500/5 border-red-500/20 shadow-red-500/5 shadow-2xl'
-            }`}>
-              <div className={`flex items-center gap-4 text-4xl font-black ${
-                showResult ? 'text-green-400' : 'text-red-400'
-              }`}>
+            <div className={`p-12 rounded-[3rem] border-2 animate-slide-up flex flex-col items-center gap-6 ${showResult ? 'bg-green-500/5 border-green-500/20 shadow-green-500/5 shadow-2xl' : 'bg-red-500/5 border-red-500/20 shadow-red-500/5 shadow-2xl'}`}>
+              <div className={`flex items-center gap-4 text-4xl font-black ${showResult ? 'text-green-400' : 'text-red-400'}`}>
                 {showResult ? <CheckCircle2 size={48} /> : <XCircle size={48} />}
                 {showResult ? '¡CORRECTO!' : '¡UPS! INCORRECTO'}
               </div>
-              <p className="text-slate-300 text-xl text-center italic leading-relaxed max-w-2xl font-medium">
-                "{shuffledQuestions[currentIdx].explanation}"
-              </p>
+              <p className="text-slate-300 text-xl text-center italic leading-relaxed max-w-2xl font-medium">"{shuffledQuestions[currentIdx].explanation}"</p>
             </div>
           )}
         </div>
